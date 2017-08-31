@@ -207,7 +207,7 @@
     "no-param-reassign": [
       "error",
       {
-        "props": true
+        "props": false
       }
     ],
     "no-prototype-builtins": [
