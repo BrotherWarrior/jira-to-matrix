@@ -1,7 +1,7 @@
 const redis = require('redis');
 const bluebird = require('bluebird');
-const conf = require('./config');
-const log = require('./utils/log.js')(module);
+const appConfig = require('./app/modules/config');
+const log = require('./app/modules/log.js')(module);
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
@@ -18,7 +18,7 @@ const createClient = function createClient(config) {
     return result;
 };
 
-const client = createClient(conf.redis);
+const client = createClient(appConfig.redis);
 
 client.on('error', err => {
     log.error(`Redis error:\n${err}`);

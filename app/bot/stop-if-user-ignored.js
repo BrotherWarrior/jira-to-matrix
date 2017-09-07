@@ -1,5 +1,5 @@
-const config = require('../config');
-const {webHookUser} = require('../jira');
+const appConfig = require('../../app/modules/config');
+const {webHookUser} = require('../../jira');
 
 const shouldIgnore = (body, conf) => {
     const username = webHookUser(body);
@@ -13,7 +13,7 @@ const shouldIgnore = (body, conf) => {
 };
 
 module.exports = function middleware(req, res, next) {
-    const {ignore, username} = shouldIgnore(req.body, config);
+    const {ignore, username} = shouldIgnore(req.body, appConfig);
     if (ignore) {
         res.end(`User "${username}" ignored according to config`);
         return;

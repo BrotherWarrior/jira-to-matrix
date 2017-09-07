@@ -1,6 +1,5 @@
-const conf = require('../config');
-const log = require('../utils/log.js')(module);
-const {connect, disconnect} = require('./sdk-client')(conf.matrix, log);
+const appConfig = require('../../app/modules/config');
+const {connect, disconnect} = require('./sdk-client')(appConfig.matrix);
 const apiClient = require('./api-client')(connect);
 const helpers = require('./helpers');
 

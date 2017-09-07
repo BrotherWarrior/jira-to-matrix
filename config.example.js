@@ -1,6 +1,9 @@
+/* eslint camelcase: 0 */
 module.exports = Object.freeze({
-    port: 4100, // where to listen JIRA webhooks
-    lang: 'en', // a language bot talks to users in
+    // where to listen JIRA webhooks
+    port: 4100,
+    // a language bot talks to users in
+    lang: 'en',
     jira: {
         url: 'https://jira.example.org',
         user: 'bot',
@@ -34,14 +37,25 @@ module.exports = Object.freeze({
         host: '127.0.0.1',
         port: 6379,
         prefix: 'jira-hooks:',
-        ttl: 60 * 60 * 24 * 30, // seconds (30 days here)
+        // seconds (30 days here)
+        ttl: 60 * 60 * 24 * 30,
     },
-    ttm_minutes: 60, // time-to-matter, how long to re-try digesting jira hooks
+    // time-to-matter, how long to re-try digesting jira hooks
+    ttm_minutes: 60,
     matrix: {
         domain: 'matrix.example.org',
-        user: 'bot', // short name, before colon, without @
+        // short name, before colon, without @
+        user: 'bot',
         password: 'key',
-        tokenTTL: 10 * 60, // new token request interval (10 minutes here)
-        syncTimeoutSec: 20, // seconds
+        // new token request interval (10 minutes here)
+        tokenTTL: 10 * 60,
+        // seconds
+        syncTimeoutSec: 20,
     },
-})
+    log: {
+        type: 'console',
+        filePath: 'logs/jira_bot',
+        fileLevel: 'silly',
+        consoleLevel: 'silly',
+    },
+});

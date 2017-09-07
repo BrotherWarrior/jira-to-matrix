@@ -1,6 +1,6 @@
 const lodash = require('lodash');
 const htmlToText = require('html-to-text').fromString;
-const jira = require('../jira');
+const jira = require('../../jira/index');
 
 const getTextIssue = function getTextIssue(req, address) {
     const text = String(

@@ -1,5 +1,5 @@
 const Ramda = require('ramda');
-const {postChangesToLinks: conf} = require('../config').features;
+const {postChangesToLinks} = require('../../app/modules/config').features;
 const {shouldPostChanges} = require('./post-issue-updates');
 const {postStatusChanged, getNewStatus} = require('./post-epic-updates');
 
@@ -12,7 +12,7 @@ const handleLink = async function handleLink(hook, link, mclient) {
         return;
     }
     const destStatusCat = Ramda.path(['fields', 'status', 'statusCategory', 'id'], destIssue);
-    if (conf.ignoreDestStatusCat.includes(destStatusCat)) {
+    if (postChangesToLinks.ignoreDestStatusCat.includes(destStatusCat)) {
         return;
     }
     const roomID = await mclient.getRoomId(destIssue.key);

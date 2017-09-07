@@ -1,12 +1,12 @@
 const Ramda = require('ramda');
 const to = require('await-to-js').default;
 const marked = require('marked');
-const log = require('../utils/log.js')(module);
-const {translate} = require('../locales');
-const redis = require('../redis-client');
-const jira = require('../jira');
-const {filePath} = require('../utils');
-const {epicUpdates: epicConf} = require('../config').features;
+const log = require('../../app/modules/log.js')(module);
+const {translate} = require('../../locales/index');
+const redis = require('../../redis-client');
+const jira = require('../../jira/index');
+const {filePath} = require('../../utils/index');
+const {epicUpdates: epicConf} = require('../modules/config/index').features;
 
 const epicRedisKey = epicID => `epic|${epicID}`;
 

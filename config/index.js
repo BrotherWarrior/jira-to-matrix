@@ -4,9 +4,9 @@ const validate = require('./validate-config.js');
 
 // const ROOT_DIR = process.cwd();
 
-let confgigFilepath = '../../config.js';
+let confgigFilepath = '../config.js';
 if (process.env.NODE_ENV) {
-    confgigFilepath = `../../config.${process.env.NODE_ENV}.js`;
+    confgigFilepath = `../config.${process.env.NODE_ENV}.js`;
 }
 const configData = require(confgigFilepath);
 
@@ -89,14 +89,8 @@ const composeConfig = function composeConfig(config) {
         userId: `@${config.matrix.user}:${config.matrix.domain}`,
     });
 
-    const version = '2017-06-27';
 
-    config.features.epicUpdates.on = () => (
-        config.features.epicUpdates.newIssuesInEpic === 'on'
-        || config.features.epicUpdates.issuesStatusChanged === 'on'
-    );
-
-    return Ramda.mergeAll([config, {matrix}, {version}]);
+    return Ramda.mergeAll([config, {matrix}, {version}]); // eslint-disable-line
 };
 
 // const config = process.env.NODE_ENV === 'test' ?

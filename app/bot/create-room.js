@@ -1,8 +1,8 @@
 /* eslint camelcase: 0 */
 const Ramda = require('ramda');
-const jira = require('../jira');
-const {helpers} = require('../matrix');
-const log = require('../utils/log.js')(module);
+const jira = require('../../jira/index');
+const {helpers} = require('../../app/matrix/index');
+const log = require('../../app/modules/log.js')(module);
 
 /**
  * @param {*} client ???

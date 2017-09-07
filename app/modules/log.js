@@ -1,7 +1,7 @@
 const path = require('path');
 const winston = require('winston');
 const WinstonDailyRotateFile = require('winston-daily-rotate-file');
-const config = require('../config');
+const appConfig = require('../../app/modules/config');
 
 /**
  * Customized settings for logger module "winston".
@@ -23,7 +23,7 @@ const getLogger = function getLogger(module) {
     // specifies the transport of logs depending on the settings
     const setTransports = [];
     /** @type {{type, consoleLevel, filePath, fileLevel}} */
-    const logConfig = Object.assign({}, config.log);
+    const {log: logConfig} = appConfig;
 
     // logging in console
     if (logConfig.type === 'console' || logConfig.type === 'both') {

@@ -2,8 +2,8 @@
 const lodash = require('lodash');
 const Ramda = require('ramda');
 const to = require('await-to-js').default;
-const conf = require('../config');
-const log = require('../utils/log.js')(module);
+const appConfig = require('../../app/modules/config/index');
+const log = require('../../app/modules/log.js')(module);
 
 const api = {
     createRoom: client => (
@@ -22,7 +22,7 @@ const api = {
     getRoomId: client => (
         async function getRoomId(alias) {
             const [err, response] = await to(
-                client.getRoomIdForAlias(`#${alias}:${conf.matrix.domain}`)
+                client.getRoomIdForAlias(`#${alias}:${appConfig.matrix.domain}`)
             );
             if (err) {
                 if (err.errcode !== 'M_NOT_FOUND') {
@@ -82,7 +82,7 @@ const api = {
     createAlias: client => (
         async function createAlias(alias, roomId) {
             const [err] = await to(client.createAlias(
-                `#${alias}:${conf.matrix.domain}`,
+                `#${alias}:${appConfig.matrix.domain}`,
                 roomId
             ));
             if (err) {

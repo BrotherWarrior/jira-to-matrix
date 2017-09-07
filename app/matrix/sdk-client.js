@@ -1,5 +1,5 @@
-let log;
 const sdk = require('matrix-js-sdk');
+const log = require('../../app/modules/log.js')(module);
 
 const has = function objHasProperty(obj, property) {
     return Object.prototype.hasOwnProperty.call(obj, property);
@@ -125,8 +125,7 @@ const initConnector = function initConnector(config) {
     return {connect, disconnect};
 };
 
-module.exports = function init(config, pLogger = console) {
-    log = pLogger;
+module.exports = function init(config) {
     const connector = initConnector(config);
 
     const wellConnected = function wellConnected(syncState) {

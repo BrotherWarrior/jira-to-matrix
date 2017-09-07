@@ -1,5 +1,5 @@
 const Ramda = require('ramda');
-const mconf = require('../config').matrix;
+const mconf = require('../../app/modules/config').matrix;
 
 const membersInvited = function membersInvited(roomMembers) {
     return Ramda.pipe(

@@ -1,7 +1,7 @@
 const Ramda = require('ramda');
-const jira = require('../jira');
-const matrix = require('../matrix');
-const log = require('../utils/log.js')(module);
+const jira = require('../../jira/index');
+const matrix = require('../../app/matrix/index');
+const log = require('../../app/modules/log.js')(module);
 
 /**
  * @param {*} client ???

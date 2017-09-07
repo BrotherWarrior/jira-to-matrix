@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 const Ramda = require('ramda');
-const {filePath} = require('../../utils');
+const {filePath} = require('../../../utils/index');
 const {postComment} = require('./post-comment');
 
 const isCommentEvent = ({webhookEvent, issue_event_type_name}) => {

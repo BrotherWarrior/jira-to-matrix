@@ -1,56 +1,37 @@
 const http = require('http');
-const express = require('express');
-const bodyParser = require('body-parser');
-const conf = require('./config');
-const bot = require('./bot');
-const matrix = require('./matrix');
-const log = require('./utils/log.js')(module);
-const {checkNodeVersion} = require('./utils');
-
-if (!checkNodeVersion()) {
-    process.exit(1);
-}
-
-process.on('uncaughtException', err => {
-    if (err.errno === 'EADDRINUSE') {
-        log.error(`Port ${conf.port} is in use!\n${err}`);
-    } else {
-        log.error(`Uncaught exception!\n${err}`);
-    }
-    process.exit(1);
-});
-
-const app = express();
-
-app.use(bodyParser.json({strict: false}));
-
-app.post('/', bot.createApp(express));
-
-// version, to verify deployment
-app.get('/', (req, res) => {
-    res.end(`Version ${conf.version}`);
-});
-// end any request for it not to hang
-app.use((req, res) => {
-    res.end();
-});
+const appConfig = require('./app/modules/config');
+const log = require('./app/modules/log.js')(module);
+const app = require('./app');
 
 const server = http.createServer(app);
-server.listen(conf.port, () => {
-    log.info(`Server is listening on port ${conf.port}`);
+server.listen(appConfig.port, () => {
+    const mode = appConfig.devMode || appConfig.testMode || appConfig.prodMode;
+    log.info(`Server is listening on port ${appConfig.port} on ${mode} mode`);
 });
 
-const onExit = async function onExit() {
-    await matrix.disconnect();
+const onExit = async function onExit(error) {
+    if (error && error instanceof Error) {
+        let errorMessage = `Uncaught exception!`;
+
+        if (error.errno === 'EADDRINUSE') {
+            errorMessage = `Port ${appConfig.port} is in use!`;
+        }
+
+        log.error(errorMessage, error);
+    }
+    log.info(`On exit message or code:`, error);
+
+    await app.matrix.disconnect();
     if (server.listening) {
         server.close(() => {
+            log.info('Stop and sutdown server');
             process.exit(1);
         });
-        return;
     }
     process.exit(1);
 };
 
-process.on('exit', onExit);
-process.on('SIGINT', onExit);
+process.on('SIGINT', () => {
+    onExit('SIGINT');
+});
 process.on('uncaughtException', onExit);

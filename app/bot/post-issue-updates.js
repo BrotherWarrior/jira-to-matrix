@@ -1,8 +1,8 @@
 const Ramda = require('ramda');
-const jira = require('../jira');
-const {translate} = require('../locales');
-const {composeRoomName} = require('../matrix').helpers;
-const log = require('../utils/log.js')(module);
+const jira = require('../../jira/index');
+const {translate} = require('../../locales/index');
+const {composeRoomName} = require('../../app/matrix/index').helpers;
+const log = require('../../app/modules/log.js')(module);
 
 const helpers = {
     fieldNames: items => Ramda.pipe(

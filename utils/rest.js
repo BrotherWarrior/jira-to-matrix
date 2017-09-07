@@ -1,7 +1,7 @@
 const Ramda = require('ramda');
 const fetch = require('node-fetch');
 const to = require('await-to-js').default;
-const log = require('../utils/log.js')(module);
+const log = require('../app/modules/log.js')(module);
 
 /**
  * @param {String} url URL to JIRA API

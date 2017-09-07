@@ -1,10 +1,10 @@
 const Ramda = require('ramda');
 const to = require('await-to-js').default;
 const marked = require('marked');
-const log = require('../utils/log.js')(module);
-const redis = require('../redis-client');
-const jira = require('../jira');
-const {translate} = require('../locales');
+const log = require('../../app/modules/log.js')(module);
+const redis = require('../../redis-client');
+const jira = require('../../jira');
+const {translate} = require('../../locales');
 // const { shouldPostChanges } = require('./post-issue-updates')
 
 const postLink = async function postLink(issue, relation, related, mclient) {

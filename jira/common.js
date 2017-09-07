@@ -1,12 +1,12 @@
 const Ramda = require('ramda');
 const {filePath} = require('../utils');
-const conf = require('../config');
+const appConfig = require('../app/modules/config');
 
 /**
  * @returns {string} ???
  */
 const auth = function auth() {
-    const {user, password} = conf.jira;
+    const {user, password} = appConfig.jira;
     const encoded = new Buffer(`${user}:${password}`).toString('base64');
     return `Basic ${encoded}`;
 };

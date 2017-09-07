@@ -1,5 +1,5 @@
-const matrix = require('../matrix');
-const log = require('../utils/log.js')(module);
+const matrix = require('../../app/matrix/index');
+const log = require('../../app/modules/log.js')(module);
 
 /**
  * @param {Object} req Request data

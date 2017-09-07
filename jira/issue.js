@@ -1,6 +1,6 @@
 const Ramda = require('ramda');
 const lodash = require('lodash');
-const conf = require('../config');
+const appConfig = require('../app/modules/config');
 const {auth} = require('./common');
 const {fetchJSON, paramsToQueryString} = require('../utils');
 
@@ -9,7 +9,7 @@ const {fetchJSON, paramsToQueryString} = require('../utils');
  * @returns {string} ???
  */
 const ref = function ref(issueKey) {
-    return `${conf.jira.url}/browse/${issueKey}`;
+    return `${appConfig.jira.url}/browse/${issueKey}`;
 };
 
 /**
@@ -53,7 +53,7 @@ const collectParticipants = async function collectParticipants(issue) {
  */
 const get = async function get(id, params) {
     const issue = await fetchJSON(
-        `${conf.jira.url}/rest/api/2/issue/${id}${paramsToQueryString(params)}`,
+        `${appConfig.jira.url}/rest/api/2/issue/${id}${paramsToQueryString(params)}`,
         auth()
     );
     return issue;

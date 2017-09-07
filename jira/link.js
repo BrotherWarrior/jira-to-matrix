@@ -1,10 +1,10 @@
-const config = require('../config');
+const appConfig = require('../app/modules/config');
 const {auth} = require('./common');
 const {fetchJSON} = require('../utils');
 
 const get = async function get(id) {
     const link = await fetchJSON(
-        `${config.jira.url}/rest/api/2/issueLink/${id}`,
+        `${appConfig.jira.url}/rest/api/2/issueLink/${id}`,
         auth()
     );
     return link;
